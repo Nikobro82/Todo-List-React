@@ -3,14 +3,12 @@ import {Link} from "react-router-dom"
 import {useState} from 'react'
 
 function Card(props) {
-    console.log("CARD PROPS")
-    console.log(props)
-
     const table = props.table
 
     const [visible, setVisible] = useState(true)
 
     const deleteCard = () => {
+        setVisible(false)
         // delete code here
     }
 
@@ -26,7 +24,7 @@ function Card(props) {
 
                 <p className = "card-text">{table.desc}</p>
                 <button className = "delete-button" onClick={deleteCard}>Delete</button>
-        </motion.div>
+            </motion.div>
             
         
         

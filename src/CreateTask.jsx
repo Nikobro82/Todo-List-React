@@ -1,5 +1,6 @@
 import { tr } from "framer-motion/client";
 import { useState } from "react";
+import {motion} from "framer-motion"
 
 function CreateTaskFrame(props) {
     const [name, setName] = useState("")
@@ -13,8 +14,13 @@ function CreateTaskFrame(props) {
     return (
         <>
             {(props.visible) ? 
-            <div className = "create-task-frame">
-                <h1>CREATE TASK</h1>
+            <motion.div className = "create-task-frame"
+            initial = {{scale: 0}}
+            animate = {{scale: 1}}
+            transition = {{duration: 0.35}}
+            >
+                <h1>Create Task</h1>
+                <hr></hr>
                 <p>Title</p>
                 <input onChange={(text) => setName(text.target.value)} className = "titleText" type = "text"></input>
                 <p>Description</p>
@@ -22,8 +28,8 @@ function CreateTaskFrame(props) {
                 <br></br>
                 <hr></hr>
                 <br></br>
-                <button onClick = {createTask}>Create Task</button>
-            </div>
+                <motion.button className = "create-task-button"  whileHover = {{scale: 1.05}} onClick = {createTask}>Create</motion.button>
+            </motion.div>
         : null}
         </>
     

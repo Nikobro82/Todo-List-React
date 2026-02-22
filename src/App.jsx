@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import Card from "./Card.jsx"
 import {createElement} from 'react'
-import { m } from 'framer-motion'
+import { motion } from 'framer-motion'
 import CreateTaskFrame from './CreateTask.jsx'
 
 const todoList = {
@@ -46,17 +46,19 @@ function Home() {
   return (
     <>
       <div className = "todo-list-container">
-        <h1>My Todo List</h1>
+        <h1>Niko's Todo List!</h1>
         <hr></hr>
 
         <div className = "main-container">
           <h1>Board</h1>
+          <hr></hr>
+          <br></br>
           {tasks.map(task => (
             <Card table = {task} key = {task.name}></Card>
           ))}
         </div>
         <div className = "sideBar">
-          <button className = "side-button" onClick = {createTask}>Create Task</button>
+          <motion.button whileHover = {{scale: 1.05}} className = "side-button" onClick = {createTask}>Create</motion.button>
         </div>
       </div>
       <CreateTaskFrame visible = {creationVisible} onCreate = {addTask}></CreateTaskFrame>
