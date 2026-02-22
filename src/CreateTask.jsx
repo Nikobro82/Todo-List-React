@@ -8,7 +8,12 @@ function CreateTaskFrame(props) {
 
 
     const createTask = () => {
-        props.onCreate(name, desc)
+        if (name && desc) {
+            props.onCreate(name, desc)
+            setName()
+            setDesc()
+        }
+        
     }
 
     return (
