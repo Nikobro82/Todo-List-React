@@ -12,6 +12,20 @@ function Card(props) {
         // delete code here
         props.onRemove(table.id)
     }
+
+    let priority = table.Priority || "None"
+    switch(priority) {
+        case "0":
+            priority = "Low"
+            break
+        case "1":
+            priority = "Medium"
+            break
+        case "2":
+            priority = "High"
+            break
+    }
+    
     return(
         <>
          {visible ? 
@@ -24,7 +38,7 @@ function Card(props) {
                 <h2 className = "card-title">{table.name}</h2>
 
                 <p className = "card-text">{table.desc}</p>
-                
+                <p className = "card-text">Priority: {priority}</p>
             </motion.div>
             
         

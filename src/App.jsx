@@ -26,19 +26,33 @@ function Home() {
     setCreationVisible(!creationVisible)
   }
 
-  const addTask = (name, desc) => {
-    console.log("BUTTON CLICKED")
+  const addTask = (name, desc, priority) => {
     setCreationVisible(false)
+    priority = priority || 0
     const newTask = {
       "name" : name,
       "desc" : desc,
-      "id" : crypto.randomUUID()
+      "id" : crypto.randomUUID(),
+      "Priority" : priority
     }
-    setTasks([...tasks, newTask])
+    setTasks([...tasks, newTask].sort((b,a) => a.Priority - b.Priority))
   }
 
   const removeTask = (id) => {
     setTasks(prev => prev.filter(task => task.id !== id))
+  }
+
+
+
+  const sortTasks = (task_data_table) => {
+     task_data_table.forEach((table) => {
+        if (!table.Priority) {
+          table.Priority = 0
+        }
+      })
+      // sorts array to highest to lowest by priority
+      task_data_table.sort((b,a) => a.Priority - b.Priority)
+      return task_data_table
   }
 
   useEffect (() => {
@@ -46,7 +60,8 @@ function Home() {
 
     if (tasks_data) {
       const task_data_table = JSON.parse(tasks_data)
-      setTasks(task_data_table)
+      const sorted_table = sortTasks(task_data_table)
+      setTasks(sorted_table)
     } else {
       setTasks([])
     }
@@ -72,7 +87,7 @@ function Home() {
           <hr></hr>
           <div className = "card-container">
             {tasks.map(task => (
-              <Card table = {task} key = {task.id} onRemove = {removeTask} id = {task.id}></Card>
+              <Card table = {task} key = {task.id} onRemove = {removeTask} id = {task.id} priority = {task.Priority}></Card>
             ))}
           </div>
           

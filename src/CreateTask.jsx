@@ -5,15 +5,22 @@ import {motion} from "framer-motion"
 function CreateTaskFrame(props) {
     const [name, setName] = useState("")
     const [desc, setDesc] = useState("")
+    const [priority, setPriority] = useState()
 
 
     const createTask = () => {
         if (name && desc) {
-            props.onCreate(name, desc)
+            props.onCreate(name, desc, priority)
             setName()
             setDesc()
+            setPriority()
         }
         
+    }
+
+    const updatePriority = (value) => {
+        setPriority(value)
+        console.log(`PRIORITY: ${value}`)
     }
 
     return (
@@ -30,6 +37,13 @@ function CreateTaskFrame(props) {
                 <input onChange={(text) => setName(text.target.value)} className = "titleText" type = "text"></input>
                 <p>Description</p>
                 <input onChange={(text) => setDesc(text.target.value)} className = "descText" type = "text"></input>
+                <p>Priority</p>
+                <select onChange = {(value) => updatePriority(value.target.value)}>
+                    <option value = {null}>None</option>
+                    <option value = {0}>Low</option>
+                    <option value = {1}>Medium</option>
+                    <option value = {2}>High</option>
+                </select>
                 <br></br>
                 <hr></hr>
                 <br></br>
