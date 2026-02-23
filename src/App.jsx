@@ -4,6 +4,7 @@ import Card from "./Card.jsx"
 import {createElement} from 'react'
 import { motion } from 'framer-motion'
 import CreateTaskFrame from './CreateTask.jsx'
+import UpdatesFrame from "./updates.jsx"
 
 
 function App() {
@@ -21,9 +22,11 @@ function Home() {
 
   const [tasks, setTasks] = useState([])
   const [creationVisible, setCreationVisible] = useState(false)
+  const version = "3.0";
+  const [updatesVisible, setUpdatesVisible] = useState(false)
 
   const createTask = () => {
-    setCreationVisible(!creationVisible)
+    
   }
 
   const addTask = (name, desc, priority) => {
@@ -47,7 +50,7 @@ function Home() {
   const sortTasks = (task_data_table) => {
      task_data_table.forEach((table) => {
         if (!table.Priority) {
-          table.Priority = 0
+          table.Priority = -1
         }
       })
       // sorts array to highest to lowest by priority
@@ -77,10 +80,12 @@ function Home() {
   return (
     <>
       <h1 className = "header">Niko's Todo List!</h1>
+      <h3>Version: {version}</h3>
       <hr></hr>
       <div className = "todo-list-container">
         <div className = "sideBar">
-          <motion.button whileHover = {{scale: 1.05}} className = "side-button" onClick = {createTask}>Create Task</motion.button>
+          <motion.button whileHover = {{scale: 1.05}} className = "side-button" onClick = {() => setCreationVisible(!creationVisible)}>Create</motion.button>
+          <motion.button whileHover = {{scale: 1.05}} className = "side-updates-button"  onClick = {() => setUpdatesVisible(!updatesVisible)}>Updates</motion.button>
         </div>
         <div className = "main-container">
           <h1>Board</h1>
@@ -94,6 +99,7 @@ function Home() {
         </div>
       </div>
       <CreateTaskFrame visible = {creationVisible} onCreate = {addTask}></CreateTaskFrame>
+      <UpdatesFrame visible = {updatesVisible} version = {version}></UpdatesFrame>
     </>
     
   );

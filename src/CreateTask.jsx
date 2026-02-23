@@ -29,7 +29,7 @@ function CreateTaskFrame(props) {
             <motion.div className = "create-task-frame"
             initial = {{scale: 0}}
             animate = {{scale: 1}}
-            transition = {{duration: 0.35}}
+            transition = {{duration: 0.25}}
             >
                 <h1>Create Task</h1>
                 <hr></hr>
